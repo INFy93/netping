@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="block mb-8">
-    <a href="#" class="bg-green-500 hover:bg-green-700 text-white dark:bg-gray-700 dark:hover:bg-gray-600 font-bold py-2 px-4 rounded">Добавить точку</a>
+    <a href="{{ route('netping_add_page') }}" class="bg-green-500 hover:bg-green-700 text-white dark:bg-gray-700 dark:hover:bg-gray-600 font-bold py-2 px-4 rounded">Добавить точку</a>
 </div>
 
 <div class="flex flex-col">

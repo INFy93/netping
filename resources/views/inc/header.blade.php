@@ -6,7 +6,7 @@
             <div class="flex space-x-4">
                 <!-- logo -->
                 <div>
-                    <a href="#"
+                    <a href="{{ route('home') }}"
                         class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -19,7 +19,7 @@
 
                 <!-- primary nav -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="#"
+                    <a href="{{ route('home') }}"
                         class="flex justify-between items-center space-x-1 py-5 px-2 text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white dark:focus:text-white @if(Route::currentRouteName() == 'home')active_menu @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -93,7 +93,7 @@
                     class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1" aria-labelledby="user_trigger">
                         <li>
-                            <a href="#"
+                            <a href="{{ route('profile') }}"
                                 class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -151,7 +151,7 @@
     <!-- mobile menu -->
     <div class="mobile-menu hidden md:hidden divide-y divide-gray-400">
         <div class="py-1">
-            <a href="#" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
+            <a href="{{ route('home') }}" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -195,6 +195,14 @@
             </a>
         </div>
         <div class="py-1">
+            <a href="{{ route('profile') }}" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+                <div>Профиль</div>
+            </a>
             <a href="{{ route('logout') }}" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
