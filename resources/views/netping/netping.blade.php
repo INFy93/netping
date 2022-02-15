@@ -52,7 +52,7 @@
                                 class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
                                 {{ $netping->name }}
                                 @if(Auth::user()->isAdmin())
-                                <a href="/netping/edit/{{ $netping->id }}">
+                                <a href="{{ route('netping_edit_page', $netping->id) }}">
                                     <svg style="float:right; display:inline-block; width: 10%;"
                                         xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                         viewBox="0 0 20 20" fill="currentColor">
