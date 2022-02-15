@@ -32,7 +32,15 @@ Route::get('/logout', [LoginController::class, 'logout']);
 /* main page (redirects after login) */
 Route::get('/netping', [MainController::class, 'index'])->name('home');
 
-/* add new netping point */
+/* user profile route */
+Route::get('profile', [UserController::class, 'index'])->name('profile');
+
+/* update user info via ajax */
+Route::post('profile/update_user_info', [UserController::class, 'updateUserInfo']);
+});
+
+Route::group(['middleware' => 'is_admin'], function () {
+    /* add new netping point */
 Route::get('/netping/add', [MainController::class, 'netpingAddPage'])->name('netping_add_page');
 
 /*edit netping point */
@@ -44,12 +52,6 @@ Route::post('/netping/edit/{id}/update', [MainController::class, 'netpingEditPoi
 /* add new netping to database */
 Route::post('/netping/add/insert', [MainController::class, 'netpingAddPoint'])->name('netping_add_point');
 
-/* user profile route */
-Route::get('profile', [UserController::class, 'index'])->name('profile');
-
-/* update user info via ajax */
-Route::post('profile/update_user_info', [UserController::class, 'updateUserInfo']);
-
 /*temporary */
 Route::get('sl', function () {
 
@@ -58,6 +60,7 @@ Route::get('sl', function () {
    return Artisan::output();
 
 });
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'api'], function () {

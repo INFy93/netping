@@ -5,10 +5,11 @@
 
 @section('content')
 
+@if(Auth::user()->isAdmin())
 <div class="block mb-8">
     <a href="{{ route('netping_add_page') }}" class="bg-green-500 hover:bg-green-700 text-white dark:bg-gray-700 dark:hover:bg-gray-600 font-bold py-2 px-4 rounded">Добавить точку</a>
 </div>
-
+@endif
 <div class="flex flex-col">
     <div class="test"></div>
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -50,7 +51,7 @@
                             <td
                                 class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
                                 {{ $netping->name }}
-
+                                @if(Auth::user()->isAdmin())
                                 <a href="/netping/edit/{{ $netping->id }}">
                                     <svg style="float:right; display:inline-block; width: 10%;"
                                         xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
@@ -59,6 +60,7 @@
                                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                     </svg>
                                 </a>
+                                @endif
                             </td>
                             <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static power_state"
                                 data="{{ $netping->id }}">

@@ -28,6 +28,7 @@
                         </svg>
                         <div>NetPing</div>
                     </a>
+                    @if(Auth::user()->isAdmin())
                     <a href="#"
                         class="flex justify-between items-center space-x-1 py-5 px-2 text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -66,6 +67,7 @@
                         </svg>
                         <div>Artisan</div>
                     </a>
+                    @endif
                 </div>
             </div>
 
@@ -159,6 +161,7 @@
                 </svg>
                 <div>NetPing</div>
             </a>
+            @if(Auth::user()->isAdmin())
             <a href="#" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -193,6 +196,7 @@
                 </svg>
                 <div>Artisan</div>
             </a>
+            @endif
         </div>
         <div class="py-1">
             <a href="{{ route('profile') }}" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
