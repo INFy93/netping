@@ -35,6 +35,12 @@ Route::get('/netping', [MainController::class, 'index'])->name('home');
 /* add new netping point */
 Route::get('/netping/add', [MainController::class, 'netpingAddPage'])->name('netping_add_page');
 
+/*edit netping point */
+Route::get('/netping/edit/{id}', [MainController::class, 'netpingEditPage'])->name('netping_edit_page');
+
+/*edit netping point - POST*/
+Route::post('/netping/edit/{id}/update', [MainController::class, 'netpingEditPoint'])->name('netping_edit_point');
+
 /* add new netping to database */
 Route::post('/netping/add/insert', [MainController::class, 'netpingAddPoint'])->name('netping_add_point');
 

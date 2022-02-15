@@ -36,7 +36,7 @@ function doorState() {
                         var state_color = 'gray';
                         break;
                 }
-                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Дверь</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
+                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Дверь</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
             }
         })
     });
@@ -75,7 +75,7 @@ function alarmState() {
                         var state_color = 'gray';
                         break;
                 }
-                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Сирена</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
+                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Сирена</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
             }
 
         })
@@ -117,7 +117,7 @@ function powerState() {
                             var state_color = 'gray';
                             break;
                 }
-                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Питание</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
+                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Питание</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
             }
         })
     });
@@ -163,7 +163,7 @@ function netpingState() {
                             state_color = 'gray';
                             break;
                 }
-                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Охрана</span><span id="alarm_span' + id +'" class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text_span + '</span></td>');
+                that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Охрана</span><span id="alarm_span' + id +'" class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text_span + '</span></td>');
                 $('#act_link' + id).text(text_link);
             }
         })
