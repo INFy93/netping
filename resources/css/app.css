@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active_menu {
+    @apply border-b-2 border-indigo-400 dark:border-gray-600
+}
