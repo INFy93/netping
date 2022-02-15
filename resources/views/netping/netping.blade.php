@@ -13,42 +13,42 @@
     <div class="test"></div>
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 dark:border-gray-500 sm:rounded-lg">
+            <div class="shadow overflow-hidden border-b border-gray-200 dark:border-gray-400 dark:bg-gray-700 sm:rounded-lg">
                 <table class="border-collapse w-full" id="main_table">
                     <thead>
-                        <tr>
+                        <tr >
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Имя точки</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Питание</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Охрана</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Дверь</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Сирена</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 IP точки</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Действия</th>
                             <th
-                                class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Камера</th>
 
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-500 dark:divide-gray-600">
                         @foreach ($netpings as $netping)
                         <tr>
                             <td
-                                class="w-full lg:w-auto p-3 text-gray-800 text-left border border-b block lg:table-cell relative lg:static">
+                                class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
                                 {{ $netping->name }}
 
                                 <a href="/netping/{{ $netping->id }}/edit">
@@ -60,45 +60,45 @@
                                     </svg>
                                 </a>
                             </td>
-                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static power_state"
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static power_state"
                                 data="{{ $netping->id }}">
                                 <span
                                     class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Питание</span>
 
                             </td>
-                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static netping_state"
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static netping_state"
                                 data="{{ $netping->id }}" id="{{ $netping->id }}">
                                 <span
                                     class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Охрана</span>
 
                             </td>
-                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static door_state"
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static door_state"
                                 data="{{ $netping->id }}">
                                 <span
                                     class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Дверь</span>
                             </td>
-                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static alarm_state"
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static alarm_state"
                                 data="{{ $netping->id }}">
                                 <span
                                     class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Сирена</span>
                             </td>
                             <td
-                                class="w-full lg:w-auto p-3 text-gray-800 text-left border border-b block lg:table-cell relative lg:static">
+                                class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
                                 <a href="http://{{ $netping->ip }}"
-                                    class="text-blue-600 hover:text-blue-800 underline" target="_blank">{{
+                                    class="text-blue-600 dark:text-blue-200 hover:text-blue-200 dark:hover:text-blue-300 underline" target="_blank">{{
                                     $netping->ip }}</a>
                             </td>
                             <td
-                                class="w-full lg:w-auto p-3 text-gray-800 border border-b text-left block lg:table-cell relative lg:static">
+                                class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-300 border border-b text-left block lg:table-cell relative lg:static">
                                 <a href="#"
-                                    class="netping_action text-blue-600 hover:text-blue-800 underline"
+                                    class="netping_action text-blue-600 dark:text-blue-200 hover:text-blue-900 dark:hover:text-blue-300 underline"
                                     data-id="{{ $netping->id }}" id="act_link{{$netping->id}}"></a>
                             </td>
                             @php
                             header("Content-Type: image/jpeg");
                             @endphp
                             <td
-                                class="w-full lg:w-auto p-3 text-gray-800 border border-b text-left block lg:table-cell relative lg:static">
+                                class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-300 border border-b text-left block lg:table-cell relative lg:static">
                                 @if ($netping->camera_ip)
                                 <a href="#cam_popup" id="cam_link" rel="modal:open"
                                     cam_id="{{ $netping->id }}"><svg
