@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use User;
+use App\Models\User;
 
 class UserTableController extends Controller
 {
@@ -12,5 +12,10 @@ class UserTableController extends Controller
         $users = User::all();
 
         return view('user_table.index');
+    }
+
+    public function addUser()
+    {
+
     }
 }

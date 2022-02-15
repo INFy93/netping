@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Api\NetpingApiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserTableController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::get('profile', [UserController::class, 'index'])->name('profile');
 Route::post('profile/update_user_info', [UserController::class, 'updateUserInfo']);
 });
 
-Route::group(['middleware' => 'is_admin'], function () {
+Route::group(['middleware' => 'is_admin', 'prefix' => 'dashboard'], function () {
 /*
  * Netping block
  *
@@ -61,6 +62,14 @@ Route::post('/netping/add/insert', [MainController::class, 'netpingAddPoint'])->
  * User block
  *
 */
+
+/* users table page */
+Route::get('/users', [UserTableController::class, 'index'])->name('users');
+
+/* add new user */
+Route::get('/user/add', [UserTableController::class, 'addUser'])->name('add_user');
+
+
 
 /*temporary */
 Route::get('sl', function () {
