@@ -40,7 +40,12 @@ Route::post('profile/update_user_info', [UserController::class, 'updateUserInfo'
 });
 
 Route::group(['middleware' => 'is_admin'], function () {
-    /* add new netping point */
+/*
+ * Netping block
+ *
+*/
+
+/* add new netping point */
 Route::get('/netping/add', [MainController::class, 'netpingAddPage'])->name('netping_add_page');
 
 /*edit netping point */
@@ -51,6 +56,11 @@ Route::post('/netping/edit/{id}/update', [MainController::class, 'netpingEditPoi
 
 /* add new netping to database */
 Route::post('/netping/add/insert', [MainController::class, 'netpingAddPoint'])->name('netping_add_point');
+
+/*
+ * User block
+ *
+*/
 
 /*temporary */
 Route::get('sl', function () {
