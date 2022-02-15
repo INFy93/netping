@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Api\NetpingApiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTableController;
+use App\Http\Controllers\Api\CameraController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'api'], function () {
     Route::get('/door/{id}', [NetpingApiController::class, 'get_door_data']);
     Route::get('/alarm/{id}', [NetpingApiController::class, 'get_alarm_data']);
     Route::get('/alarm/set/{id}', [NetpingApiController::class, 'set_alarm']);
+    Route::get('/netping_camera/{id}', [CameraController::class, 'getCamera']);
 
     });
 Auth::routes();

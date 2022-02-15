@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modal/modals.css') }}">
+
     @toastr_css
     <title>@yield('title')</title>
     <script>
@@ -38,11 +39,22 @@
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bundle/bundle.min.js') }}"></script>
     <script src="{{ asset('js/extra.js') }}"></script>
+    <script src="{{ asset('js/camera.js') }}"></script>
     @if(Route::currentRouteName() == 'profile')
     <script src="{{ asset('js/user/update_info.js') }}"></script>
     @endif
     @toastr_js
     @toastr_render
+    <div class="modal fade" id="cam_popup" tabindex="-1" aria-labelledby="cam_popup"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content dark:bg-gray-800 dark:text-white">
+            <div class="m_body">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
