@@ -44,4 +44,39 @@ class UserTableController extends Controller
 
         return redirect()->route('users');
     }
+
+    public function changeNotify($id)
+    {
+        $user = User::find($id);
+
+        if ($user->order_email == 1)
+        {
+            $user->order_email = 0;
+            $user->save();
+
+            $toastr_message = 'Уведомления по email отключены.';
+            $span_text = 'Нет';
+            $tooltip_text = 'Включить уведомления';
+            $old_class = 'bg-green-400';
+            $class = 'bg-red-400';
+        } else
+        {
+            $user->order_email = 1;
+            $user->save();
+
+            $toastr_message = 'Уведомления по email включены.';
+            $span_text = 'Да';
+            $tooltip_text = 'Отключить уведомления';
+            $old_class = 'bg-red-400';
+            $class = 'bg-green-400';
+        }
+
+        return response()->json([
+            'message' => $toastr_message,
+            'text' => $span_text,
+            'tooltip_text' => $tooltip_text,
+            'old_class' => $old_class,
+            'class' => $class
+        ]);
+    }
 }

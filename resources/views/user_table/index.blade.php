@@ -62,7 +62,11 @@
                             </td>
                             <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static">
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Уведомлять?</span>
-                                <span class="rounded bg-{{ $user->mail_color }}-400 py-1 px-3 text-xs font-bold">{{ $user->mail_text }}</span>
+                                <span data-tooltip-target="tooltip-{{ $user->id }}" data-tooltip-placement="bottom" user-id="{{ $user->id }}" class="email_span rounded bg-{{ $user->mail_color }}-400 py-1 px-3 text-xs font-bold">{{ $user->mail_text }}</span>
+                                <div id="tooltip-{{ $user->id }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                    <div id="emailed_text-{{ $user->id }}">{{$user->order_email == 1 ? 'Отключить уведомления' : 'Включить уведомления'}}</div>
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
                             </td>
                             <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Добавлен</span>

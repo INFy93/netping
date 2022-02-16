@@ -39,11 +39,16 @@
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="{{ asset('js/theme.js') }}"></script>
     <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+    @if(Route::currentRouteName() == 'home')
     <script src="{{ asset('js/bundle/bundle.min.js') }}"></script>
     <script src="{{ asset('js/extra.js') }}"></script>
     <script src="{{ asset('js/camera.js') }}"></script>
+    @endif
     @if(Route::currentRouteName() == 'profile')
     <script src="{{ asset('js/user/update_info.js') }}"></script>
+    @endif
+    @if(Route::currentRouteName() == 'users')
+    <script src="{{ asset('js/user/change_notify.js') }}"></script>
     @endif
     @toastr_js
     @toastr_render
