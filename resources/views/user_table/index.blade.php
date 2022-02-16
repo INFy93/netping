@@ -26,10 +26,13 @@
                                 Логин</th>
                             <th
                                 class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                Роль</th>
+                            <th
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Email</th>
                             <th
                                 class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                                Emailed?</th>
+                                Уведомлять?</th>
                             <th
                                 class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Добавлен</th>
@@ -39,7 +42,38 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-500 dark:divide-gray-600">
-
+                        @foreach ($users as $user)
+                        <tr>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Имя</span>
+                                    {{ $user->name }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Логин</span>
+                                {{ $user->login }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Уведомлять?</span>
+                                <span class="rounded bg-{{ $user->role_color }}-400 py-1 px-3 text-xs font-bold">{{ $user->role }}</span>
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Email</span>
+                                {{ $user->email }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Уведомлять?</span>
+                                <span class="rounded bg-{{ $user->mail_color }}-400 py-1 px-3 text-xs font-bold">{{ $user->mail_text }}</span>
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Добавлен</span>
+                                {{ date('Y-m-d H:i:s', strtotime($user->created_at)) }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Добавлен</span>
+                                {{ $user->last_login == NULL ? 'Никогда' : date('Y-m-d H:i:s', strtotime($user->last_login)) }} <strong>{{ $user->last_login_ip == NULL? '' : '('.$user->last_login_ip.')' }}</strong>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 @endsection

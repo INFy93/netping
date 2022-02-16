@@ -67,8 +67,11 @@ Route::post('/netping/add/insert', [MainController::class, 'netpingAddPoint'])->
 /* users table page */
 Route::get('/users', [UserTableController::class, 'index'])->name('users');
 
-/* add new user */
+/* add new user page*/
 Route::get('/user/add', [UserTableController::class, 'addUser'])->name('add_user');
+
+/*add new user to DB - POST */
+Route::post('/user/add/store', [UserTableController::class, 'addUserToDB'])->name('store_user');
 
 
 
