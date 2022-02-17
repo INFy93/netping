@@ -95,7 +95,13 @@ Route::get('/actions', [ActionController::class, 'index'])->name('actions');
 Route::get('/action/add', [ActionController::class, 'addActionPage'])->name('add_action');
 
 /* add action POST */
-Route::post('/action/inster', [ActionController::class, 'addAction'])->name('store_action');
+Route::post('/action/insert', [ActionController::class, 'addAction'])->name('store_action');
+
+/* edit action page */
+Route::get('/action/{id}', [ActionController::class, 'editActionPage'])->name('edit_action');
+
+/* edit action POST */
+Route::post('/action/{id}/edit', [ActionController::class, 'editAction'])->name('update_action');
 
 /*temporary */
 Route::get('sl', function () {

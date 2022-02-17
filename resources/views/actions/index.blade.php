@@ -39,7 +39,7 @@
             <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <span
                     class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"></span>
-                    <a href="#"
+                    <a href="{{ route('edit_action', $action->id) }}"
                         class="text-blue-600 hover:text-blue-800 underline">Редактировать действие</a>
             </td>
         </tr>

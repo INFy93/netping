@@ -31,4 +31,25 @@ class ActionController extends Controller
 
         return redirect()->route('actions');
     }
+
+    public function editActionPage($id)
+    {
+        $action = Action::find($id);
+
+        return view('actions.edit', compact('action'));
+    }
+
+    public function editAction(Request $request, $id)
+    {
+        $action = Action::find($id);
+
+        $action->name = $request->input('action_name');
+
+        $action->save();
+
+        toastr()->success('Действие успешно обновлено!');
+
+        return redirect()->route('actions');
+    }
+
 }
