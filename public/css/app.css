@@ -1400,6 +1400,13 @@ input:checked + .toggle-bg {
 .email_span {
     cursor: pointer;
 }
+.hover\:border-b-2:hover {
+  border-bottom-width: 2px;
+}
+.hover\:border-indigo-400:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(141 162 251 / var(--tw-border-opacity));
+}
 .hover\:bg-blue-900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(35 56 118 / var(--tw-bg-opacity));
@@ -1575,6 +1582,10 @@ input:checked + .toggle-bg {
 }
 .dark .dark\:ring-offset-gray-600 {
   --tw-ring-offset-color: #4B5563;
+}
+.dark .hover\:dark\:border-gray-600:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 .dark .dark\:hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;

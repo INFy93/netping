@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\NetpingApiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTableController;
 use App\Http\Controllers\Api\CameraController;
+use App\Http\Controllers\ActionController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,7 @@ Route::get('/users', [UserTableController::class, 'index'])->name('users');
 Route::get('/user/add', [UserTableController::class, 'addUser'])->name('add_user');
 
 /*add new user to DB - POST */
-Route::post('/user/add/store', [UserTableController::class, 'addUserToDB'])->name('store_user');
+Route::post('/user/add/insert', [UserTableController::class, 'addUserToDB'])->name('store_user');
 
 /*change ability to offer email after netping point changin' status via ajax*/
 Route::get('/user/changeNotify/{id}', [UserTableController::class, 'changeNotify']);
@@ -81,6 +82,20 @@ Route::get('/user/{id}', [UserTableController::class, 'changeUser'])->name('edit
 
 /* update user info - POST */
 Route::post('/user/{id}/update', [UserTableController::class, 'updateUser'])->name('update_user_info');
+
+/*
+ * Actions block
+ *
+*/
+
+/* actions page */
+Route::get('/actions', [ActionController::class, 'index'])->name('actions');
+
+/* add action page */
+Route::get('/action/add', [ActionController::class, 'addActionPage'])->name('add_action');
+
+/* add action POST */
+Route::post('/action/inster', [ActionController::class, 'addAction'])->name('store_action');
 
 /*temporary */
 Route::get('sl', function () {
