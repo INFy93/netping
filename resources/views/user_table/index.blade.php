@@ -47,7 +47,7 @@
                             <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-left border border-b block lg:table-cell relative lg:static">
                                     <span class="lg:hidden flex absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Имя</span>
                                     @if (Auth::id() != $user->id)
-                                    <a href="#" class="text-blue-600 dark:text-blue-200 hover:text-blue-200 dark:hover:text-blue-300 underline">
+                                    <a href="{{ route('edit_user_page', $user->id) }}" class="text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-300 underline">
                                         {{ $user->name }}
                                     </a>
                                     @else

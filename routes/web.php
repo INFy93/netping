@@ -76,6 +76,11 @@ Route::post('/user/add/store', [UserTableController::class, 'addUserToDB'])->nam
 /*change ability to offer email after netping point changin' status via ajax*/
 Route::get('/user/changeNotify/{id}', [UserTableController::class, 'changeNotify']);
 
+/* user edit page */
+Route::get('/user/{id}', [UserTableController::class, 'changeUser'])->name('edit_user_page');
+
+/* update user info - POST */
+Route::post('/user/{id}/update', [UserTableController::class, 'updateUser'])->name('update_user_info');
 
 /*temporary */
 Route::get('sl', function () {

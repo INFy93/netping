@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Requests\UsersRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class UserTableController extends Controller
 {
     public function index()
@@ -78,5 +79,35 @@ class UserTableController extends Controller
             'old_class' => $old_class,
             'class' => $class
         ]);
+    }
+
+    public function changeUser($id)
+    {
+        $user = User::where('id', $id)->first();
+        if (Auth::id() == $user->id)
+        {
+            toastr()->error('Нельзя редактировать самого себя через эту страницу. Используйте меню справа вверху для редактирования своего аккаунта.', 'Ошибка', ['timeOut' => 7000]);
+            return redirect()->route('users');
+        }
+
+        return view('user_table.edit', compact('user'));
+    }
+
+    public function updateUser(UpdateUserRequest $request, $id)
+    {
+        //dd($request);
+        $user = User::where('id', $id)->first();
+
+        $user->name = $request->input('user_name');
+        $user->login = $request->input('user_login');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('user_pass'));
+        $user->is_admin = isset($request->user_is_admin) ? 1 : 0;
+
+        $user->save();
+
+        toastr()->success('Пользователь '. $user->name .': информация обновлена.');
+
+        return redirect()->route('users');
     }
 }
