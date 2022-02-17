@@ -33,6 +33,35 @@ CAM_LOGIN = "login" //логин
 CAM_PASS = "pass" //пароль
 CAM_LINK = "link" //ссылка на jpeg-скриншот потока
 ```
+IP камер можно хранить в базе или прописывать явно (но лучше в базе).
+В текущем проекте получение скриншота реализовано так:
+
+```
+public function getCamera($netping_id)
+    {
+        header("Content-Type: image/jpeg");
+        $login = env('CAM_LOGIN');
+        $pass = env('CAM_PASS');
+        $link = env('CAM_LINK');
+
+        $netping = Netping::find($netping_id);
+
+        try {
+            $screenshot = HTTP::timeout(env('NETPING_TIMEOUT'))
+                ->withHeaders([
+                    'Content-Type' => 'image/jpeg'
+                ])
+                ->withBasicAuth($login, $pass)
+                ->get($netping->camera_ip . $link);
+        } catch (ConnectionException $exp) {
+            return "Не удалось подключиться к камере";
+        }
+        $img = imagecreatefromstring($screenshot);
+        imagejpeg($img);
+        imagedestroy($img);
+        return $img;
+    }
+```
 
 ## Лицензия
 
