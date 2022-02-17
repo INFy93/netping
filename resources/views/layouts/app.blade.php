@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modal/modals.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/logs.css') }}">
+    @if(Route::currentRouteName() == 'logs')
+    <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
+    @endif
 
     @toastr_css
     <title>@yield('title')</title>
@@ -19,6 +25,7 @@
         }
     </script>
 </head>
+
 <body>
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900" id="app">
         @include('inc.header')
@@ -50,16 +57,23 @@
     @if(Route::currentRouteName() == 'users')
     <script src="{{ asset('js/user/change_notify.js') }}"></script>
     @endif
+    @if(Route::currentRouteName() == 'logs')
+    <script src="{{ asset('js/datatables/moment.min.js') }}"></script>
+    <script src="{{ asset('js/datatables/daterangepicker.min.js') }}"></script>
+    <script src="{{ asset('js/datatables/datepicker.js') }}"></script>
+    <script src="{{ asset('js/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/datatable.js') }}"></script>
+    @endif
     @toastr_js
     @toastr_render
-    <div class="modal fade" id="cam_popup" tabindex="-1" aria-labelledby="cam_popup"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content dark:bg-gray-800 dark:text-white">
-            <div class="m_body">
+    <div class="modal fade" id="cam_popup" tabindex="-1" aria-labelledby="cam_popup" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content dark:bg-gray-800 dark:text-white">
+                <div class="m_body">
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTableController;
 use App\Http\Controllers\Api\CameraController;
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,7 @@ Route::post('/user/{id}/update', [UserTableController::class, 'updateUser'])->na
 /*
  * Actions block
  *
+ *
 */
 
 /* actions page */
@@ -103,6 +105,12 @@ Route::get('/action/{id}', [ActionController::class, 'editActionPage'])->name('e
 /* edit action POST */
 Route::post('/action/{id}/edit', [ActionController::class, 'editAction'])->name('update_action');
 
+/*
+ * Logs block
+ *
+ *
+*/
+Route::get('logs', [LogController::class, 'index'])->name('logs');
 /*temporary */
 Route::get('sl', function () {
 

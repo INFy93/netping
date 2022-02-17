@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Netping;
 use App\Models\User;
+use App\Models\Log;
 use Illuminate\Support\Facades\Http;
 use App\Jobs\QueueSenderEmail;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,7 @@ class NetpingApiController extends Controller
     public function set_alarm($netping_id)
     {
         $netping = Netping::find($netping_id);
-       // $log = new Log();
+        $log = new Log();
         $users = User::get();
         $current_state = \NetpingApi::get_netping_state($netping->netping_state);
         switch ($current_state) {
@@ -68,19 +69,17 @@ class NetpingApiController extends Controller
                 $state = explode("'", $raw_state);
                 //dd($state);
                 if ($state[1] == 'ok') {
-                  /*  $log->user_id = Auth::id();
+                    $log->user_id = Auth::id();
                     $log->netping_id = $netping_id;
                     $log->action = 1;
-                    $log->save();*/
-                    foreach ($users as $user)
-                    {
-                        if ($user->order_email == 1)
-                        {
+                    $log->save();
+                    foreach ($users as $user) {
+                        if ($user->order_email == 1) {
                             dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping->name, 'Снята с охраны', date('H:i:s'), date('Y-m-d')));
                         }
                     }
                     return 'Снята с охраны';
-                } else if ($state[1] == 'error'){
+                } else if ($state[1] == 'error') {
                     return 'Ошибка запроса';
                 }
                 break;
@@ -92,19 +91,17 @@ class NetpingApiController extends Controller
                 }
                 $state = explode("'", $raw_state);
                 if ($state[1] == 'ok') {
-                 /*   $log->user_id = Auth::id();
+                    $log->user_id = Auth::id();
                     $log->netping_id = $netping_id;
                     $log->action = 2;
-                    $log->save();*/
-                    foreach ($users as $user)
-                    {
-                        if ($user->order_email == 1)
-                        {
+                    $log->save();
+                    foreach ($users as $user) {
+                        if ($user->order_email == 1) {
                             dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping->name, 'Поставлена на охрану', date('H:i:s'), date('Y-m-d')));
                         }
                     }
                     return 'Поставлена на охрану';
-                } else if ($state[1] == 'error'){
+                } else if ($state[1] == 'error') {
                     return 'Ошибка запроса';
                 }
                 break;
