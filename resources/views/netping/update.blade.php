@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title')Добавить точку @endsection
+@section('title')Обновить точку @endsection
 
 @section('heading')NetPing - обновить точку@endsection
 

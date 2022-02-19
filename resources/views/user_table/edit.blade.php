@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title')Добавить пользователя @endsection
+@section('title')Обновить пользователя @endsection
 
 @section('heading')NetPing - изменить пользователя <strong>{{ $user->name }}</strong>@endsection
 
