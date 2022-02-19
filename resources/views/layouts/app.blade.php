@@ -63,6 +63,9 @@
     <script src="{{ asset('js/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/datatable.js') }}"></script>
     @endif
+    @if(Route::currentRouteName() == 'artisan')
+    <script src="{{ asset('js/artisan.js') }}"></script>
+    @endif
     @toastr_js
     @toastr_render
     <div class="modal fade" id="cam_popup" tabindex="-1" aria-labelledby="cam_popup" aria-hidden="true">

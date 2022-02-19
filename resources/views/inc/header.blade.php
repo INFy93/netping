@@ -56,8 +56,8 @@
                         </svg>
                         <div>Логи</div>
                     </a>
-                    <a href="#"
-                        class="flex justify-between items-center space-x-1 py-5 px-3 text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
+                    <a href="{{ route('artisan') }}"
+                        class="flex justify-between items-center space-x-1 py-5 px-3 text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white dark:focus:text-white @if(Route::currentRouteName() == 'artisan')active_menu @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -186,7 +186,7 @@
                 </svg>
                 <div>Логи</div>
             </a>
-            <a href="#" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
+            <a href="{{ route('artisan') }}" class="flex flex-row items-center space-x-1 block py-2 px-4 text-sm hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:focus:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

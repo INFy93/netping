@@ -10,6 +10,7 @@ use App\Http\Controllers\UserTableController;
 use App\Http\Controllers\Api\CameraController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\ArtisanController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -111,15 +112,21 @@ Route::post('/action/{id}/edit', [ActionController::class, 'editAction'])->name(
  *
 */
 Route::get('logs', [LogController::class, 'index'])->name('logs');
-/*temporary */
-Route::get('sl', function () {
 
-    Artisan::call('storage:link');
+/*
+ * Artisan block
+ *
+ *
+*/
 
-   return Artisan::output();
+/* artisan main page */
+Route::get('/artisan', [ArtisanController::class, 'index'])->name('artisan');
 
-});
+/* clear caches via ajax */
+Route::get('/artisan/clear', [ArtisanController::class, 'clearCaches']);
 
+/* create simlink via ajax */
+Route::get('/artisan/simlink', [ArtisanController::class, 'createSimlink']);
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'api'], function () {
