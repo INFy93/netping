@@ -8,7 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modal/modals.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/logs.css') }}">
     @if(Route::currentRouteName() == 'logs')
     <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">

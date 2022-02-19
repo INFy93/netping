@@ -3,8 +3,76 @@
 @tailwind utilities;
 
 .active_menu {
-    @apply border-b-2 border-indigo-400 dark:border-gray-600
+    @apply border-b-2 border-blue-400 dark:border-gray-600
 }
 .email_span {
     cursor: pointer;
+}
+.paginate {
+    margin-top: 10px;
+}
+div.dataTables_filter, div.dataTables_length {
+    padding: 10px;
+    @apply dark:text-gray-100
+  }
+/*wrapper*/
+.dataTables_wrapper {
+    @apply bg-white dark:bg-gray-600
+}
+/*Form fields*/
+.dataTables_wrapper select,
+.dataTables_wrapper .dataTables_filter input {
+    padding-right: 1.25rem !important; 		/*pl-4*/
+    @apply text-gray-700 pl-4 leading-tight border-2 border-gray-400 bg-gray-200 dark:bg-gray-600 dark:text-gray-100 overflow-x-hidden
+}
+.dataTables_wrapper select option {
+    @apply dark:bg-gray-600 dark:text-gray-100
+}
+/*Pagination Buttons - Current selected */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current	{
+    color: #fff !important;				/*text-white*/
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06); 	/*shadow*/
+    font-weight: 700;					/*font-bold*/
+    border-radius: .25rem;				/*rounded*/
+    background: #34D399 !important;		/*bg-indigo-500*/
+    border: 1px solid transparent;		/*border border-transparent*/
+    @apply dark:bg-gray-600 dark:text-gray-100 !important
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    @apply dark:text-gray-100 !important
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled{
+    @apply dark:text-gray-400 !important
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover{
+    @apply dark:text-gray-300 !important
+}
+.dataTables_info {
+    @apply dark:text-gray-100 !important
+}
+/*Pagination Buttons - Hover */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover		{
+    color: #fff !important;				/*text-white*/
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);	 /*shadow*/
+    font-weight: 700;					/*font-bold*/
+    border-radius: .25rem;				/*rounded*/
+    background: #059669 !important;		/*bg-indigo-500*/
+    border: 1px solid transparent;		/*border border-transparent*/
+    @apply dark:bg-gray-500 dark:text-gray-200 dark:font-medium !important
+}
+table.dataTable {
+    width: 100% !important;
+}
+table.dataTable tbody tr {
+    border-width: 2px !important;
+    border-color: rgb(0 0 0) !important;
+    border-style: solid !important;
+}
+
+
+
+@media (max-width: 768px) {
+    table.dataTable {
+        border-collapse: collapse !important;
+    }
 }
