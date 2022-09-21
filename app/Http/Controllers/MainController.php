@@ -28,17 +28,29 @@ class MainController extends Controller
         $netping->name = $request->input('netping_name');
         $netping->ip = $request->input('netping_ip');
         $netping->camera_ip = $request->input('camera_ip');
-        $netping->power_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('POWER_STATE');
-        $netping->door_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('DOOR_STATE');
-        $netping->alarm_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_STATE');
-        $netping->alarm_control = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_CONTROL');
-        $netping->netping_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('NETPING_STATE');
+
+        if ($request->input('revision') == 2)
+        {
+            $netping->power_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('POWER_STATE');
+            $netping->door_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('DOOR_STATE');
+            $netping->alarm_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_STATE');
+            $netping->alarm_control = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_CONTROL');
+            $netping->netping_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('NETPING_STATE');
+        }
+        else if ($request->input('revision') == 4)
+        {
+
+        }
+
 
         $netping->save();
 
         toastr()->success('Точка успешно добавлена!');
 
         return redirect()->route('home');
+
+       /* dd( $request );
+        return $request->input('revision'); */
     }
 
     public function netpingEditPage($id)
