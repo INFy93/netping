@@ -52,7 +52,9 @@ function alarmState() {
             async: true,
             url: 'api/alarm/' + id,
             success: function (alarm_data) {
-                switch (alarm_data) {
+            if(alarm_data.revision == 2)
+            {
+                switch (alarm_data.alarm_state[0]) {
                     case '0':
                         if (that.closest('tr').hasClass('bg-red-400')) {
                             that.closest('tr').removeClass('bg-red-400');
@@ -75,6 +77,32 @@ function alarmState() {
                         var state_color = 'gray';
                         break;
                 }
+            } else if (alarm_data.revision == 4)
+            {
+                switch (alarm_data.alarm_state[0]) {
+                    case '1':
+                        if (that.closest('tr').hasClass('bg-red-400')) {
+                            that.closest('tr').removeClass('bg-red-400');
+                        }
+                        var text = 'ALARM!!!';
+                        var state_color = 'red';
+                        break;
+                    case '0':
+                        if (that.closest('tr').hasClass('bg-red-400')) {
+                            that.closest('tr').removeClass('bg-red-400');
+                        }
+                        var text = 'Отключена';
+                        var state_color = 'green';
+                        break;
+                    case '3':
+                        if (!that.closest('tr').hasClass('bg-red-400')) {
+                            that.closest('tr').addClass('bg-red-400');
+                        }
+                        var text = 'N/A';
+                        var state_color = 'gray';
+                        break;
+                }
+            }
                 that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Сирена</span><span class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text + '</span></td>');
             }
 
@@ -136,7 +164,10 @@ function netpingState() {
             async: true,
             url: 'api/secure/' + id,
             success: function (netping_data) {
-               switch(netping_data)
+                console.log(netping_data.secure_state[0]);
+            if (netping_data.revision == 2)
+            {
+                switch(netping_data.secure_state)
                 {
                     case 'direction:2':
                         if (that.closest('tr').hasClass('bg-red-400')) {
@@ -163,6 +194,37 @@ function netpingState() {
                             state_color = 'gray';
                             break;
                 }
+            } else if (netping_data.revision == 4)
+            {
+                switch(netping_data.secure_state[0])
+                {
+                    case '1':
+                        if (that.closest('tr').hasClass('bg-red-400')) {
+                            that.closest('tr').removeClass('bg-red-400');
+                        }
+                        text_span = 'Включена'
+                        text_link = 'Снять с охраны';
+                        state_color = 'green';
+                        break;
+                    case '0':
+                        if (that.closest('tr').hasClass('bg-red-400')) {
+                            that.closest('tr').removeClass('bg-red-400');
+                        }
+                        text_span = 'Отключена'
+                        text_link = 'Поставить на охрану';
+                        state_color = 'yellow';
+                        break;
+                    case '3':
+                            if (!that.closest('tr').hasClass('bg-red-400')) {
+                                that.closest('tr').addClass('bg-red-400');
+                            }
+                            text_span = 'N/A';
+                            text_link = 'Точка недоступна';
+                            state_color = 'gray';
+                            break;
+                }
+            }
+
                 that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">Охрана</span><span id="alarm_span' + id +'" class="rounded bg-' + state_color + '-400 py-1 px-3 text-xs font-bold">' + text_span + '</span></td>');
                 $('#act_link' + id).text(text_link);
             }

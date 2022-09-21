@@ -28,6 +28,7 @@ class MainController extends Controller
         $netping->name = $request->input('netping_name');
         $netping->ip = $request->input('netping_ip');
         $netping->camera_ip = $request->input('camera_ip');
+        $netping->revision = $request->input('revision');
 
         if ($request->input('revision') == 2)
         {
@@ -39,7 +40,12 @@ class MainController extends Controller
         }
         else if ($request->input('revision') == 4)
         {
-
+            $netping->power_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('POWER_STATE_V4');
+            $netping->door_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('DOOR_STATE_V4');
+            $netping->alarm_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_STATE_V4');
+            $netping->alarm_control = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_CONTROL_V4');
+            $netping->netping_state = env('NETPING_LOGIN') . $request->input('netping_ip') . env('NETPING_STATE_V4');
+            $netping->alarm_switch_v4 = env('NETPING_LOGIN') . $request->input('netping_ip') . env('ALARM_SWITCH_V4');
         }
 
 

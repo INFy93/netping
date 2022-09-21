@@ -56,7 +56,7 @@ Class NetpingApi
        return $alarm_state[2];
     }
 
-    public static function get_netping_state($netping_ip)
+    public static function get_netping_state($netping_ip, $revision)
     {
         try
         {
@@ -66,11 +66,20 @@ Class NetpingApi
         {
             return '3';
         }
-        $netping_state = iconv("windows-1251","utf-8",$raw_netping_state->body());
-        $netping_state = Str::after($netping_state, 'data=');
-        $netping_state = Str::remove(';', $netping_state);
-        $netping_state = explode(',', $netping_state);
-       // $netping_state = json_decode(array_map(function($v){return (string)$v;},$netping_state));
-       return $netping_state[19];
+
+        if ($revision == 2)
+        {
+            $netping_state = iconv("windows-1251","utf-8",$raw_netping_state->body());
+            $netping_state = Str::after($netping_state, 'data=');
+            $netping_state = Str::remove(';', $netping_state);
+            $netping_state = explode(',', $netping_state);
+
+            return $netping_state[19];
+
+        } else if ($revision == 4)
+        {
+            return explode(",", $raw_netping_state);
+        }
+
     }
 }
