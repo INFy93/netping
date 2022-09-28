@@ -164,7 +164,6 @@ function netpingState() {
             async: true,
             url: 'api/secure/' + id,
             success: function (netping_data) {
-                console.log(netping_data.secure_state[0]);
             if (netping_data.revision == 2)
             {
                 switch(netping_data.secure_state)
