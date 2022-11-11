@@ -245,20 +245,24 @@ function alarmControl()
         success: function (state) {
             switch (state)
             {
-                case '3':
-                    toastr.error("Точка недоступна!"); break;
-                case 'Снята с охраны':
+                case '0':
                     $('#alarm_span' + id).removeClass('bg-green-400');
                     $('#alarm_span' + id).addClass('bg-yellow-400');
                     text_span = 'Отключена'
                     text_link = 'Поставить на охрану';
-                    toastr.success(state); break;
-                case 'Поставлена на охрану':
+                    toastr.success("Снята с охраны"); break;
+                case '1':
                     $('#alarm_span' + id).removeClass('bg-yellow-400');
                     $('#alarm_span' + id).addClass('bg-green-400');
                     text_span = 'Включена'
                     text_link = 'Снять с охраны';
-                    toastr.warning(state); break;
+                    toastr.warning("Поставлена на охрану"); break;
+                case '2':
+                    toastr.error("Ошибка запроса"); break;
+                case '3':
+                    toastr.error("Точка недоступна!"); break;
+                case '4':
+                    toastr.error("Невозможно поставить на охрану, т.к. открыта дверь."); break;
             }
             $('#alarm_span' + id).text(text_span);
             $('#act_link' + id).text(text_link);

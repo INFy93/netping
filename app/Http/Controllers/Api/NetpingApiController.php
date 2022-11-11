@@ -63,19 +63,19 @@ class NetpingApiController extends Controller
         $netping = Netping::find($netping_id);
         $current_state = \NetpingApi::get_netping_state($netping->netping_state, $netping->revision);
         if ($netping->revision == 4) {
-           return $this->set_alarm_v4($netping_id, $current_state);
+            return $this->set_alarm_v4($netping_id, $current_state);
         } else {
             $log = new Log();
             $users = User::get();
             switch ($current_state) {
                 case 3:
-                    return 'Ошибка связи с точкой!';
+                    $status = 3;
                     break;
                 case 'direction:2': //точка на охране - снимаем охрану
                     try {
                         $raw_state = HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping->alarm_control . '1');
                     } catch (ConnectionException $exp) {
-                        return 3;
+                        $status = 3;
                     }
                     $state = explode("'", $raw_state);
                     if ($state[1] == 'ok') {
@@ -88,41 +88,48 @@ class NetpingApiController extends Controller
                                 dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping->name, 'Снята с охраны', date('H:i:s'), date('Y-m-d')));
                             }
                         }
-                        return 'Снята с охраны';
+                        $status = 0;
                     } else if ($state[1] == 'error') {
-                        return 'Ошибка запроса';
+                        $status = 2;
                     }
                     break;
                 case 'direction:1': //точка не на охране - ставим на охрану
-                    try {
-                        $raw_state = HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping->alarm_control . '2');
-                    } catch (ConnectionException $exp) {
-                        return 3;
-                    }
-                    $state = explode("'", $raw_state);
-                    if ($state[1] == 'ok') {
-                        $log->user_id = Auth::id();
-                        $log->netping_id = $netping_id;
-                        $log->action = 2;
-                        $log->save();
-                        foreach ($users as $user) {
-                            if ($user->order_email == 1) {
-                                dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping->name, 'Поставлена на охрану', date('H:i:s'), date('Y-m-d')));
-                            }
+                    $door_state = $this->get_door_data($netping_id);
+                    if ($door_state == 1) {
+                        $status = 4;
+                        break;
+                    } else {
+                        try {
+                            $raw_state = HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping->alarm_control . '2');
+                        } catch (ConnectionException $exp) {
+                            $status = 3;
                         }
-                        return 'Поставлена на охрану';
-                    } else if ($state[1] == 'error') {
-                        return 'Ошибка запроса';
+                        $state = explode("'", $raw_state);
+                        if ($state[1] == 'ok') {
+                            $log->user_id = Auth::id();
+                            $log->netping_id = $netping_id;
+                            $log->action = 2;
+                            $log->save();
+                            foreach ($users as $user) {
+                                if ($user->order_email == 1) {
+                                    dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping->name, 'Поставлена на охрану', date('H:i:s'), date('Y-m-d')));
+                                }
+                            }
+                            $status = 1;
+                        } else if ($state[1] == 'error') {
+                            $status = 2;
+                        }
+                        break;
                     }
-                    break;
             }
         }
+        return $status;
     }
 
     public function set_alarm_v4($netping_id, $current_state)
     {
         if ($current_state == 3) {
-            return 3;
+            $status = 3;
         }
 
         $netping_v4 = Netping::find($netping_id);
@@ -136,19 +143,19 @@ class NetpingApiController extends Controller
                 try {
                     $raw_state =  HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping_v4->alarm_control . '0');
                 } catch (ConnectionException $exp) {
-                    return 3;
+                    $status = 3;
                 }
 
                 try {
                     $turn_off_the_alarm = HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping_v4->alarm_switch_v4 . '0');
                 } catch (ConnectionException $exp) {
-                    return 3;
+                    $status = 3;
                 }
 
                 $answer = explode("'", $turn_off_the_alarm);
 
                 if ($answer[1] == 'ok') {
-                   $log->user_id = Auth::id();
+                    $log->user_id = Auth::id();
                     $log->netping_id = $netping_id;
                     $log->action = 1;
                     $log->save();
@@ -157,40 +164,45 @@ class NetpingApiController extends Controller
                             dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping_v4->name, 'Снята с охраны', date('H:i:s'), date('Y-m-d')));
                         }
                     }
-                    return "Снята с охраны";
+                    $status = 0;
                 } else if ($answer[1] == 'error') {
-                    return 'Ошибка запроса';
+                    $status = 2;
                 }
                 break;
             case '0': //точка снята с охраны, исправляем это недоразумение
-                try {
-                    $raw_state =  HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping_v4->alarm_control . '1');
-                } catch (ConnectionException $exp) {
-                    return 3;
-                }
-
-                try {
-                    $restart_logic =  HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping_v4->alarm_control . '2');
-                } catch (ConnectionException $exp) {
-                    return 3;
-                }
-                if ($raw_state && $restart_logic) {
-                    $log->user_id = Auth::id();
-                    $log->netping_id = $netping_id;
-                    $log->action = 2;
-                    $log->save();
-                    foreach ($users as $user) {
-                        if ($user->order_email == 1) {
-                            dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping_v4->name, 'Поставлена на охрану', date('H:i:s'), date('Y-m-d')));
-                        }
+                $door_state = $this->get_door_data($netping_id);
+                if ($door_state == 1) {
+                    $status = 4;
+                    break;
+                } else {
+                    try {
+                        $raw_state =  HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping_v4->alarm_control . '1');
+                    } catch (ConnectionException $exp) {
+                        return 3;
                     }
-                    return "Поставлена на охрану";
+
+                    try {
+                        $restart_logic =  HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping_v4->alarm_control . '2');
+                    } catch (ConnectionException $exp) {
+                        return 3;
+                    }
+                    if ($raw_state && $restart_logic) {
+                        $log->user_id = Auth::id();
+                        $log->netping_id = $netping_id;
+                        $log->action = 2;
+                        $log->save();
+                        foreach ($users as $user) {
+                            if ($user->order_email == 1) {
+                                dispatch(new QueueSenderEmail($user->email, Auth::user()->name, $netping_v4->name, 'Поставлена на охрану', date('H:i:s'), date('Y-m-d')));
+                            }
+                        }
+                        $status = 1;
+                    } else {
+                        $status = 2;
+                    }
+                    break;
                 }
-                else
-                {
-                    return 'Ошибка запроса';
-                }
-                break;
         }
+        return $status;
     }
 }
