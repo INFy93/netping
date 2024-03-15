@@ -95,10 +95,10 @@ class NetpingApiController extends Controller
                     break;
                 case 'direction:1': //точка не на охране - ставим на охрану
                     $door_state = $this->get_door_data($netping_id);
-                    if ($door_state == 1) {
+                    if ($door_state == 1) { //если дверь открыта - поставить на охрану нельзя
                         $status = 4;
                         break;
-                    } else {
+                    } else { //дверь закрыта - можно ставить на охрану
                         try {
                             $raw_state = HTTP::timeout(env('NETPING_TIMEOUT'))->get($netping->alarm_control . '2');
                         } catch (ConnectionException $exp) {

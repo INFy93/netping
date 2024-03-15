@@ -9,4 +9,9 @@ class Netping extends Model
 {
     use HasFactory;
     protected $table = 'netping';
+
+    public function bdcom()
+    {
+        return $this->hasOne(Bdcom::class, 'id', 'bdcom_id');
+    }
 }

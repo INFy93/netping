@@ -3,6 +3,7 @@ $(document).ready(function () {
     doorState();
     alarmState();
     netpingState();
+    getTemperature();
 });
 function doorState() {
     $('.door_state').each(function (index, value) {
@@ -232,6 +233,40 @@ function netpingState() {
 
 }
 
+function getTemperature() {
+    $('.temperature').each(function (index, value) {
+        var that = $(this);
+        var id = that.attr('data');
+        var temp_color;
+        that.html('Обновляю...');
+        $.ajax({
+            async: true,
+            url: 'api/temp/' + id,
+            success: function (temp) {
+            if (temp.temperature)
+            {
+                if (temp.temperature <= 69 )
+                {
+                    temp_color = 'green-600 dark:text-green-300'
+                } else if (temp.temperature >= 70 && temp.temperature <= 74)
+                {
+                    temp_color = 'orange-400 dark:text-orange-300'
+                }
+                else if (temp.temperature >= 75)
+                {
+                    temp_color = 'red-600 dark:text-red-400'
+                }
+            } else
+            {
+                temp.temperature = '-'
+            }
+               that.html('<span class="lg:hidden absolute top-0 left-0 bg-blue-200 dark:bg-gray-700 px-2 py-1 text-xs font-bold uppercase">T°</span><span class="py-1 px-3 text-' + temp_color + ' font-bold">' + temp.temperature + '</span>');
+            }
+        })
+    });
+
+}
+
 $(document.body).on('click', '.netping_action', alarmControl);
 function alarmControl()
 {
@@ -270,6 +305,8 @@ function alarmControl()
         }
     });
 
+
+
     return false; //чтобы не скроллило вверх страницы на моб версии
 
 }
@@ -278,3 +315,4 @@ setInterval(powerState, 20000);
 setInterval(netpingState, 20000);
 setInterval(doorState, 20000);
 setInterval(alarmState, 20000);
+setInterval(getTemperature, 300000);

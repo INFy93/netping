@@ -44,6 +44,10 @@ Route::get('profile', [UserController::class, 'index'])->name('profile');
 Route::post('profile/update_user_info', [UserController::class, 'updateUserInfo']);
 });
 
+/* BDCOM temeratures graphs */
+
+Route::view('/graphs', 'graphs.graphs')->name('bdcom.graphs');
+
 Route::group(['middleware' => 'is_admin', 'prefix' => 'dashboard'], function () {
 /*
  * Netping block
@@ -136,6 +140,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'api'], function () {
     Route::get('/alarm/{id}', [NetpingApiController::class, 'get_alarm_data']);
     Route::get('/alarm/set/{id}', [NetpingApiController::class, 'set_alarm']);
     Route::get('/netping_camera/{id}', [CameraController::class, 'getCamera']);
+
+    Route::get('/temp/{id}', [\App\Http\Controllers\Api\BdcomController::class, 'getTemperature']);
 
     });
 Auth::routes();

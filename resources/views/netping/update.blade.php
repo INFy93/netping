@@ -32,6 +32,22 @@
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-600">
+                <label for="bdcom_name" class="block font-medium text-sm text-gray-700 dark:text-gray-300">BDCOM</label>
+                <input type="text" name="bdcom_name" id="bdcom_name" class="dark:bg-gray-500 dark:text-gray-100 form-input rounded-md shadow-sm mt-1 block w-full"
+                       value="{{ isset($netping->bdcom) ? $netping->bdcom->bdcom_name : ''  }}" />
+                @error('description')
+                <p class="text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-600">
+                <label for="bdcom_ip" class="block font-medium text-sm text-gray-700 dark:text-gray-300">BDCOM IP</label>
+                <input type="text" name="bdcom_ip" id="bdcom_ip" class="dark:bg-gray-500 dark:text-gray-100 form-input rounded-md shadow-sm mt-1 block w-full"
+                       value="{{ isset($netping->bdcom) ? $netping->bdcom->bdcom_ip : ''}}" />
+                @error('bdcom_ip')
+                <p class="text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="flex items-center justify-end px-4 py-3 bg-gray-50 dark:bg-gray-600 text-right sm:px-6">
                 <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                    Обновить

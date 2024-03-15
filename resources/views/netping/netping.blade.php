@@ -42,6 +42,10 @@
                             <th
                                 class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
                                 Камера</th>
+                            <th
+                                class="p-3 font-bold uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                                T°</th>
+
 
                         </tr>
                     </thead>
@@ -115,6 +119,9 @@
                                     </svg>
                                 </a>
                                 @endif
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 dark:text-gray-100 text-center border border-b block lg:table-cell relative lg:static temperature"
+                                data="{{ $netping->bdcom_id }}">
                             </td>
                         </tr>
                         @endforeach

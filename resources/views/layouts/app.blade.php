@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900" id="app">
+    <div class="min-h-screen bg-gray-100 dark:text-green-300 dark:text-yellow-300 dark:text-red-400 dark:bg-gray-900" id="app">
         @include('inc.header')
         <header class="bg-white shadow dark:bg-gray-800">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </main>
-        @include('inc.footer')
+        <!-- @include('inc.footer') -->
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/navbar.js') }}"></script>

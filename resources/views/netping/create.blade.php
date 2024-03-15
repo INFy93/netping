@@ -33,6 +33,22 @@
                 @enderror
             </div>
             <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-600">
+                <label for="bdcom_name" class="block font-medium text-sm text-gray-700 dark:text-gray-300">BDCOM</label>
+                <input type="text" name="bdcom_name" id="bdcom_name" class="dark:bg-gray-500 dark:text-gray-100 form-input rounded-md shadow-sm mt-1 block w-full"
+                       value="{{ old('bdcom_name', '') }}" />
+                @error('camera_ip')
+                <p class="text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-600">
+                <label for="bdcom_ip" class="block font-medium text-sm text-gray-700 dark:text-gray-300">BDCOM IP</label>
+                <input type="text" name="bdcom_ip" id="bdcom_ip" class="dark:bg-gray-500 dark:text-gray-100 form-input rounded-md shadow-sm mt-1 block w-full"
+                       value="{{ old('bdcom_ip', '') }}" />
+                @error('bdcom_ip')
+                <p class="text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-600">
                 <label for="netping_ip" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Ревизия точки</label>
                 <input id="revision" type="radio" value="2" name="revision" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" checked>
                 <label for="revision" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">v.2</label>
